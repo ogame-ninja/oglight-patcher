@@ -7,7 +7,7 @@ import (
 func main() {
 	const (
 		webstoreURL    = "https://openuserjs.org/install/nullNaN/OGLight.user.js"
-		oglight_sha256 = "eb53d3ca5f42401a042b93b5015c5a5ef85ab5ba342c6266f3255caed2179d21"
+		oglight_sha256 = "eeaf2f4ec4565b54cd3069f6b9f3ec5d59ced268e58d0323f296bfd8ab2641da"
 	)
 
 	files := []ep.FileAndProcessors{
@@ -15,9 +15,9 @@ func main() {
 	}
 
 	ep.MustNew(ep.Params{
-		ExpectedSha256:   oglight_sha256,
-		WebstoreURL:      webstoreURL,
-		Files:            files,
+		ExpectedSha256: oglight_sha256,
+		WebstoreURL:    webstoreURL,
+		Files:          files,
 	}).Start()
 }
 
@@ -52,6 +52,6 @@ func processOGLight(by []byte) []byte {
 		"url:`${PROTOCOL}//${HOST}/api/s${universeNum}/${lang}/serverData.xml`,", 1)
 	by = replN(by, `data-title="${e.name}" href="https://${window.location.host}/game/index.php?`,
 		`data-title="${e.name}" href="${window.location.protocol}//${window.location.host}${window.location.pathname}?`, 1)
-	by = replN(by, "https://${window.location.host}/game/index.php", "", 32)
+	by = replN(by, "https://${window.location.host}/game/index.php", "", 33)
 	return by
 }
