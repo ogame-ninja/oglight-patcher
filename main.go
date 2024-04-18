@@ -48,6 +48,10 @@ func processOGLight(by []byte) []byte {
 			var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
 			return v.toString(16);
 		});`, 1)
+	by = replN(by, "url:`https://${window.location.host}/api/playerData.xml",
+		"url:`${PROTOCOL}//${HOST}/api/s${universeNum}/${lang}/playerData.xml", 1)
+	by = replN(by, "url:`https://${window.location.host}/api/players.xml`,",
+		"url:`${PROTOCOL}//${HOST}/api/s${universeNum}/${lang}/players.xml`,", 1)
 	by = replN(by, "url:`https://${window.location.host}/api/serverData.xml`,",
 		"url:`${PROTOCOL}//${HOST}/api/s${universeNum}/${lang}/serverData.xml`,", 1)
 	by = replN(by, `data-title="${e.name}" href="https://${window.location.host}/game/index.php?`,
