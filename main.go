@@ -7,7 +7,7 @@ import (
 func main() {
 	const (
 		webstoreURL    = "https://openuserjs.org/install/nullNaN/OGLight.user.js"
-		oglight_sha256 = "eeaf2f4ec4565b54cd3069f6b9f3ec5d59ced268e58d0323f296bfd8ab2641da"
+		oglight_sha256 = "4a7d3ed70cadac45b180e2965a8a68d64e4f11da53b192c47681d3cbf2941a08"
 	)
 
 	files := []ep.FileAndProcessors{
@@ -37,22 +37,22 @@ func processOGLight(by []byte) []byte {
 	const PROTOCOL = window.location.protocol;
 	const HOST = window.location.host;
 `, 1)
-	by = replN(by, `const t=document.cookie.match(/prsess\_([0-9]+)=/g),n=t[t.length-1].replace(/\D/g,"");`,
+	by = replN(by, "const t = document.cookie.match(/prsess\\_([0-9]+)=/g),\r\n      n = t[t.length - 1].replace(/\\D/g, \"\");",
 		`const n=document.querySelector('head meta[name="ogame-player-id"]').getAttribute('content').replace(/\D/g, '');`, 1)
-	by = replN(by, `this.server.id=window.location.host.replace(/\D/g,"")`,
+	by = replN(by, `this.server.id = window.location.host.replace(/\D/g, "")`,
 		`this.server.id=document.querySelector('head meta[name="ogame-universe"]').getAttribute('content').replace(/\D/g,"")`, 1)
-	by = replN(by, `this.account.lang=/oglocale=([a-z]+);/.exec(document.cookie)[1]`,
+	by = replN(by, `this.account.lang = /oglocale=([a-z]+);/.exec(document.cookie)[1]`,
 		`this.account.lang=lang`, 1)
-	by = replN(by, "let e=[crypto.randomUUID(),0];",
+	by = replN(by, "let e = [crypto.randomUUID(), 0];",
 		`let e = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
 			var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
 			return v.toString(16);
 		});`, 1)
-	by = replN(by, "url:`https://${window.location.host}/api/playerData.xml",
+	by = replN(by, "url: `https://${window.location.host}/api/playerData.xml",
 		"url:`${PROTOCOL}//${HOST}/api/s${universeNum}/${lang}/playerData.xml", 1)
-	by = replN(by, "url:`https://${window.location.host}/api/players.xml`,",
+	by = replN(by, "url: `https://${window.location.host}/api/players.xml`,",
 		"url:`${PROTOCOL}//${HOST}/api/s${universeNum}/${lang}/players.xml`,", 1)
-	by = replN(by, "url:`https://${window.location.host}/api/serverData.xml`,",
+	by = replN(by, "url: `https://${window.location.host}/api/serverData.xml`,",
 		"url:`${PROTOCOL}//${HOST}/api/s${universeNum}/${lang}/serverData.xml`,", 1)
 	by = replN(by, `data-title="${e.name}" href="https://${window.location.host}/game/index.php?`,
 		`data-title="${e.name}" href="${window.location.protocol}//${window.location.host}${window.location.pathname}?`, 1)
