@@ -7,7 +7,7 @@ import (
 func main() {
 	const (
 		webstoreURL    = "https://openuserjs.org/install/nullNaN/OGLight.user.js"
-		oglight_sha256 = "dbdb9cef4038e97d7d7c91796e6202d0869c97239b535ac4cf96eab1b1508b73"
+		oglight_sha256 = "cb5943b45f1a3c1cf43b81a66b7bc1a06153974241b2b34cce885ef515aaea7c"
 	)
 
 	files := []ep.FileAndProcessors{
@@ -58,6 +58,6 @@ func processOGLight(by []byte) []byte {
 		"url:`${PROTOCOL}//${HOST}/api/s${universeNum}/${lang}/serverData.xml`,", 1)
 	by = replN(by, `data-title="${e.name}" href="https://${window.location.host}/game/index.php?`,
 		`data-title="${e.name}" href="${window.location.protocol}//${window.location.host}${window.location.pathname}?`, 1)
-	by = replN(by, "https://${window.location.host}/game/index.php", "", 35)
+	by = replN(by, "https://${window.location.host}/game/index.php", "", 36)
 	return by
 }
