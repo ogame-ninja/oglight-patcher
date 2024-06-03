@@ -58,6 +58,8 @@ func processOGLight(by []byte) []byte {
 		"url:`${PROTOCOL}//${HOST}/api/s${universeNum}/${lang}/serverData.xml`,", 1)
 	by = replN(by, `data-title="${e.name}" href="https://${window.location.host}/game/index.php?`,
 		`data-title="${e.name}" href="${window.location.protocol}//${window.location.host}${window.location.pathname}?`, 1)
-	by = replN(by, "https://${window.location.host}/game/index.php", "", 36)
+	by = replN(by, `https://${window.location.host}/game/index.php?page=componentOnly&component=messagedetails&messageId=${e.id}`,
+		`${window.location.protocol}//${window.location.host}${window.location.pathname}?page=componentOnly&component=messagedetails&messageId=${e.id}`, 1)
+	by = replN(by, "https://${window.location.host}/game/index.php", "", 35)
 	return by
 }
