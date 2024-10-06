@@ -7,7 +7,7 @@ import (
 func main() {
 	const (
 		webstoreURL    = "https://openuserjs.org/install/nullNaN/OGLight.user.js"
-		oglight_sha256 = "5624aa0821c3bfe6c1892e4f6ded534e271fde44ec64b2360715c13f89a2d03e"
+		oglight_sha256 = "26320275cbedb3b81cb107901051a8d70ba3520e149236164dbb06cd43e134c7"
 	)
 
 	files := []ep.FileAndProcessors{
@@ -48,12 +48,8 @@ func processOGLight(by []byte) []byte {
 			var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
 			return v.toString(16);
 		});`, 1)
-	by = replN(by, "url: `https://${window.location.host}/api/highscore.xml",
-		"url:`${PROTOCOL}//${HOST}/api/s${universeNum}/${lang}/highscore.xml", 1)
 	by = replN(by, "url: `https://${window.location.host}/api/playerData.xml",
 		"url:`${PROTOCOL}//${HOST}/api/s${universeNum}/${lang}/playerData.xml", 1)
-	by = replN(by, "url: `https://${window.location.host}/api/players.xml`,",
-		"url:`${PROTOCOL}//${HOST}/api/s${universeNum}/${lang}/players.xml`,", 1)
 	by = replN(by, "url: `https://${window.location.host}/api/serverData.xml`,",
 		"url:`${PROTOCOL}//${HOST}/api/s${universeNum}/${lang}/serverData.xml`,", 1)
 	by = replN(by, `${t.name} <a href="https://${window.location.host}/game/index.php?`,
