@@ -37,7 +37,10 @@ func processOGLight(by []byte) []byte {
 	const UNIVERSE = "s" + universeNum + "-" + lang;
 	const PROTOCOL = window.location.protocol;
 	const HOST = window.location.host;
+	const PLAYER_ID = document.querySelector("meta[name=ogame-player-id]").content;
+	const localStoragePrefix = UNIVERSE + "-" + PLAYER_ID + "-";
 `, 1)
+	by = replN(by, `("ogl-ptreTK"`, `(localStoragePrefix+"ogl-ptreTK"`, 3)
 	by = replN(by, "var cookieAccounts = document.cookie.match(/prsess\\_([0-9]+)=/g), cookieAccounts = cookieAccounts[cookieAccounts.length - 1].replace(/\\D/g, \"\");",
 		`var cookieAccounts=document.querySelector('head meta[name="ogame-player-id"]').getAttribute('content').replace(/\D/g, '');`, 1)
 	by = replN(by, `this.server.id = window.location.host.replace(/\D/g, "")`,
